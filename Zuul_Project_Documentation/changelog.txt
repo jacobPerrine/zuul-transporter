@@ -1,0 +1,92 @@
+--------------------------------------------------------------------------
+--------------------------Summer Swing changelog--------------------------
+--------------------------------------------------------------------------
+v2017.07.03 (initial release)
+
+Game class
+ - updated class comment block to reflect the new game scenario
+ - altered createRooms() to use scenario-relevant Room objects
+ - changed display text in printWelcome() to refer to the new scenario
+ - changed display text in printHelp() to refer to the new scenario
+__________________________________________________________________________
+v2017.07.10
+
+General
+ - GameMain class is introduced to call the java main() method
+ - Moved older version modification notes to this project changelog
+
+Game class
+ - Added new method printLocationInfo() to display current room description
+   and exits from the room
+ - Replaced duplicate code in printWelcomeMessage() and goRoom() with a
+   call to printLocationInfo()
+ - Replaced the if-logic construct in goRoom() that checked for valid exit
+   directions with a call to Room object.getExit()
+ - Changed printLocationInfo to use the getExit() method of Room objects
+ - Altered printLocationInfo to call the Room objects getExitString() method
+ - Altered createRooms() to use revised setExit() method
+ - Added a new game location, stageCatwalk
+ - Changed printLocationInfo to call currentRoom.getLongDescription()
+
+Room class
+ - Changed all fields from public to private
+ - Added the getExit() method to access the exit Rooms
+ - Added new method getExitString() to return a String describing available
+   exits in a Room
+ - Changed exit fields to use a HashMap instead of four variables
+ - Changed getExitString() to use a Set
+ - Added getLongDescription() method
+__________________________________________________________________________
+v2017.07.17
+
+General
+ - Created TimeClock class to act as a game clock
+ - Created Item class to enable in-game items
+
+Game class
+ - Added the user command look(), to view the description of the
+   current room
+ - Added a case statement to processCommand() that recognizes the new look()
+   user command
+ - Deleted the now-redundant printLocationInfo() method and replaced any
+   calls to it with calls to look()
+ - Initialized a TimeClock object field in the class constructor named timer,
+   to keep track of the in-game time
+ - Added time() method to give the player a command to check the
+   in-game time
+ - Added a case statement to processCommand() that recognizes the new time()
+   user command
+ - Added a statement to the "go" case under processCommand() that advances
+   the in-game clock by ten minutes
+ - Altered the printHelp() method to dynamically retrieve the valid commands
+   from the parser using it's showCommands() method
+ - Changed printHelp() to display the String returned by a call to the parser
+   object's getCommands() method
+ - Altered createRooms() to also add items to some rooms
+
+Room class
+ - Added new object field, item, to potentially hold Item object references
+ - Altered constructor to initialize item as null
+ - Added setItem() method to define an item for a room on the fly
+ - Changed getLongDescription() to also include info about an item in the
+   room, if one exists
+
+Parser class
+ - Added the showCommands() method to print the valid command words
+ - Renamed the showCommands() method to getCommands(), changed it's
+   behavior to return a string containing the valid command words
+
+CommandWords class
+ - Added "look" to the String array holding valid user commands
+ - Added "time" to the String array holding valid user commands
+ - Added the showAll() method to display all valid commands to the user
+ - Renamed the showAll() method to getCommandList(), changed it's behavior
+   to return a String containing all valid commands
+ _________________________________________________________________________
+v2017.07.31
+
+Game class
+ - Changed createRooms() to first initialize an Item, then set it to a room
+
+Room class
+ - Changed setItem to use an Item as a parameter to set the room item.
